@@ -1,0 +1,743 @@
+/* Основные стили проекта */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+}
+
+:root {
+    --primary-color: #4A90E2;     /* Основной синий */
+    --secondary-color: #FF5252;   /* Акцентный красный */
+    --accent-color: #2196F3;      /* Дополнительный синий */
+    --accent-red: #FF4081;        /* Ярко-красный для кнопок */
+    --english-blue: #2C6DB4;      /* Темно-синий для английского */
+    --korean-light-blue: #64B5F6; /* Светло-голубой для корейского */
+    --light-blue: #E3F2FD;        /* Светло-голубой для кнопок */
+    --dark-color: #2C3E50;        /* Темный цвет для текста */
+    --light-color: #F8F9FA;       /* Светлый фон */
+    --light-grey: #F5F5F5;        /* Светло-серый для карточек */
+    --medium-grey: #E0E0E0;       /* Средний серый для разделителей */
+    --success-color: #4CAF50;     /* Зеленый для успеха */
+    --warning-color: #FF9800;     /* Оранжевый для предупреждений */
+    --danger-color: #FF5252;      /* Красный для ошибок */
+    --white: #FFFFFF;
+    --black: #000000;
+    --achievement-bg: #ECEFF1;    /* Фон для достижений */
+    --stats-bg: #F5F7FA;          /* Фон для статистики */
+}
+
+body {
+    background-color: var(--white);
+    color: var(--dark-color);
+    padding-top: 64px !important; /* Отступ для фиксированной шапки */
+}
+
+/* Исправление для шапки */
+#app {
+    min-height: 100vh;
+}
+
+/* Контейнеры */
+.custom-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 32px 24px !important; /* Увеличил отступы */
+}
+
+/* Отступы для секций */
+.section-spacing {
+    margin-bottom: 40px; /* Увеличил отступы между секциями */
+}
+
+.card-spacing {
+    margin-bottom: 32px;
+}
+
+/* Анимации */
+.fade-enter-active, .fade-leave-active {
+    transition: opacity 0.4s ease;
+}
+
+.fade-enter, .fade-leave-to {
+    opacity: 0;
+}
+
+.slide-enter-active {
+    transition: all 0.3s ease;
+}
+
+.slide-leave-active {
+    transition: all 0.3s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+}
+
+.slide-enter, .slide-leave-to {
+    transform: translateX(10px);
+    opacity: 0;
+}
+
+/* Заголовки */
+.page-title {
+    position: relative;
+    margin-bottom: 40px; /* Увеличил отступ */
+    padding-bottom: 20px;
+}
+
+.page-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 80px;
+    height: 4px;
+    background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+    border-radius: 2px;
+}
+
+.section-title {
+    margin-bottom: 32px;
+    font-weight: 600;
+    color: var(--dark-color);
+    font-size: 1.5rem !important;
+}
+
+/* Карточки */
+.language-card {
+    transition: all 0.3s ease;
+    cursor: pointer;
+    border-radius: 16px;
+    overflow: hidden;
+    margin-bottom: 24px;
+    border: 2px solid transparent;
+    padding: 24px;
+}
+
+.language-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1) !important;
+    border-color: var(--primary-color);
+}
+
+.category-card {
+    transition: all 0.3s ease;
+    border-radius: 12px;
+    margin-bottom: 24px;
+    border-left: 4px solid var(--primary-color);
+    border: 1px solid var(--medium-grey);
+    padding: 20px;
+}
+
+.category-card:hover {
+    transform: translateX(4px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08) !important;
+    border-color: var(--primary-color);
+}
+
+.lesson-card {
+    transition: all 0.2s ease;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    border: 1px solid var(--medium-grey);
+    padding: 24px;
+}
+
+.lesson-card:hover {
+    background-color: rgba(74, 144, 226, 0.05);
+    border-color: var(--primary-color);
+    transform: translateY(-2px);
+}
+
+/* Кнопки - ЯРКИЕ КРАСНЫЕ для уроков */
+.v-btn {
+    font-weight: 600 !important;
+    text-transform: none !important;
+    letter-spacing: 0.5px !important;
+    transition: all 0.3s ease !important;
+}
+
+.v-btn--contained {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1) !important;
+}
+
+.v-btn--contained:hover {
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15) !important;
+    transform: translateY(-2px);
+}
+
+.v-btn--outlined {
+    border-width: 2px !important;
+}
+
+/* ЯРКИЕ КРАСНЫЕ кнопки для уроков */
+.btn-lesson {
+    background: linear-gradient(135deg, var(--secondary-color), #FF4081) !important;
+    color: white !important;
+    font-weight: 700 !important;
+    padding: 12px 32px !important;
+    border-radius: 8px !important;
+}
+
+.btn-lesson:hover {
+    background: linear-gradient(135deg, #FF4081, var(--secondary-color)) !important;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(255, 82, 82, 0.2) !important;
+}
+
+/* Светло-голубые кнопки для профиля */
+.btn-profile {
+    background-color: var(--light-blue) !important;
+    color: var(--primary-color) !important;
+    font-weight: 600 !important;
+    border: 2px solid var(--primary-color) !important;
+}
+
+.btn-profile:hover {
+    background-color: var(--primary-color) !important;
+    color: white !important;
+}
+
+/* Кнопки с акцентными цветами */
+.btn-primary {
+    background-color: var(--primary-color) !important;
+    color: white !important;
+}
+
+.btn-secondary {
+    background-color: var(--secondary-color) !important;
+    color: white !important;
+}
+
+.btn-accent {
+    background-color: var(--accent-color) !important;
+    color: white !important;
+}
+
+/* Прогресс */
+.progress-ring {
+    position: relative;
+}
+
+.progress-value {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-weight: bold;
+    color: var(--primary-color);
+}
+
+/* Бейджи */
+.badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    margin: 4px;
+}
+
+.badge-beginner { 
+    background-color: #E3F2FD; 
+    color: #1976D2; 
+    border: 1px solid #BBDEFB;
+}
+
+.badge-intermediate { 
+    background-color: #E8F5E9; 
+    color: #388E3C; 
+    border: 1px solid #C8E6C9;
+}
+
+.badge-advanced { 
+    background-color: #FFF3E0; 
+    color: #F57C00; 
+    border: 1px solid #FFE0B2;
+}
+
+/* Примеры в уроках */
+.example-card {
+    background-color: var(--light-grey);
+    border-left: 4px solid var(--primary-color);
+    padding: 24px;
+    margin: 24px 0;
+    border-radius: 0 8px 8px 0;
+}
+
+.example-original {
+    font-weight: 700;
+    margin-bottom: 12px;
+    color: var(--dark-color);
+    font-size: 1.1rem;
+}
+
+.example-translation {
+    color: #666;
+    font-style: italic;
+    font-size: 1rem;
+}
+
+/* Правила */
+.rule-card {
+    background-color: #FFF8E1;
+    border: 2px solid #FFECB3;
+    border-radius: 12px;
+    padding: 28px;
+    margin: 24px 0;
+}
+
+.rule-title {
+    color: var(--accent-color);
+    font-weight: 700;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    font-size: 1.2rem;
+}
+
+.rule-title i {
+    margin-right: 12px;
+}
+
+/* Упражнения */
+.exercise-container {
+    padding: 32px;
+    margin: 24px 0;
+    border-radius: 16px;
+    background-color: var(--light-grey);
+    border: 2px solid var(--medium-grey);
+}
+
+.exercise-option {
+    cursor: pointer;
+    transition: all 0.2s;
+    border: 2px solid var(--medium-grey);
+    border-radius: 8px;
+    margin: 12px 0;
+    padding: 20px;
+}
+
+.exercise-option:hover {
+    background-color: rgba(74, 144, 226, 0.1) !important;
+    border-color: var(--primary-color);
+    transform: translateY(-2px);
+}
+
+.exercise-option.selected {
+    border-color: var(--primary-color);
+    background-color: rgba(74, 144, 226, 0.15) !important;
+}
+
+.exercise-option.correct {
+    background-color: rgba(76, 175, 80, 0.15) !important;
+    border-color: var(--success-color);
+}
+
+.exercise-option.incorrect {
+    background-color: rgba(255, 82, 82, 0.15) !important;
+    border-color: var(--danger-color);
+}
+
+/* Поле для ввода ответа */
+.answer-input {
+    margin: 24px 0;
+}
+
+.answer-input .v-input {
+    margin-bottom: 24px !important;
+}
+
+.answer-input .v-text-field fieldset {
+    border-width: 2px !important;
+    border-color: var(--primary-color) !important;
+}
+
+/* Кнопки упражнений */
+.exercise-btn {
+    margin: 16px 8px !important;
+    padding: 12px 28px !important;
+    font-weight: 600 !important;
+}
+
+/* Профиль */
+.profile-avatar {
+    border: 4px solid white;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    background-color: var(--primary-color);
+    color: white;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.profile-avatar.no-photo {
+    background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+}
+
+/* Статистика в профиле - светлый фон */
+.stats-item {
+    padding: 24px;
+    border-radius: 12px;
+    background-color: var(--stats-bg) !important; /* Светлый фон вместо черного */
+    color: var(--dark-color) !important;
+    margin: 12px 0;
+    border: 1px solid var(--medium-grey);
+}
+
+/* Достижения */
+.achievement-card {
+    background-color: var(--achievement-bg);
+    border: 1px solid var(--medium-grey);
+    border-radius: 12px;
+    padding: 24px;
+    margin: 16px 0;
+    transition: all 0.3s ease;
+}
+
+.achievement-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+.achievement-card.unlocked {
+    background: linear-gradient(135deg, #FFF9C4, #FFECB3);
+    border-color: #FFD54F;
+}
+
+/* Формы */
+.v-input {
+    margin-bottom: 20px !important;
+}
+
+.v-text-field fieldset {
+    border-width: 2px !important;
+    border-color: var(--medium-grey) !important;
+}
+
+.v-text-field:hover fieldset {
+    border-color: var(--primary-color) !important;
+}
+
+/* Адаптивность */
+@media (max-width: 960px) {
+    body {
+        padding-top: 56px !important;
+    }
+    
+    .custom-container {
+        padding: 24px 16px !important;
+    }
+    
+    .page-title {
+        font-size: 1.8rem !important;
+        margin-bottom: 32px;
+    }
+    
+    .section-title {
+        font-size: 1.3rem !important;
+        margin-bottom: 24px;
+    }
+    
+    .language-card, .category-card, .lesson-card {
+        margin-bottom: 20px;
+        padding: 20px;
+    }
+    
+    .exercise-container {
+        padding: 24px;
+    }
+}
+
+@media (max-width: 600px) {
+    body {
+        padding-top: 56px !important;
+    }
+    
+    .custom-container {
+        padding: 20px 12px !important;
+    }
+    
+    .language-stats {
+        flex-direction: column;
+        gap: 16px;
+    }
+    
+    .lesson-content {
+        padding: 20px !important;
+    }
+    
+    .page-title {
+        font-size: 1.5rem !important;
+        margin-bottom: 24px;
+        padding-bottom: 16px;
+    }
+    
+    .section-title {
+        font-size: 1.2rem !important;
+        margin-bottom: 20px;
+    }
+}
+
+/* Утилиты */
+.text-gradient {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.shadow-soft {
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08) !important;
+}
+
+.hover-lift {
+    transition: transform 0.2s ease;
+}
+
+.hover-lift:hover {
+    transform: translateY(-4px);
+}
+
+/* Отступы между элементами */
+.v-row {
+    margin: -16px !important; /* Увеличил отступы между колонками */
+}
+
+.v-col {
+    padding: 16px !important; /* Увеличил отступы внутри колонок */
+}
+
+/* Заголовки разделов */
+.section-header {
+    margin: 40px 0 32px 0;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--light-grey);
+}
+
+/* Карточки с контентом */
+.content-card {
+    border-radius: 16px;
+    border: 1px solid var(--medium-grey);
+    background-color: var(--white);
+    padding: 32px; /* Увеличил padding */
+    margin: 24px 0; /* Увеличил margin */
+}
+
+/* Иконки */
+.v-icon {
+    color: var(--primary-color);
+}
+
+/* Навигация */
+.v-tab {
+    font-weight: 600 !important;
+    letter-spacing: 0.3px !important;
+}
+
+.v-tab--active {
+    color: var(--primary-color) !important;
+}
+
+/* Скроллбар */
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--light-grey);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--primary-color);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--accent-color);
+}
+
+/* Разделители */
+.v-divider {
+    border-color: var(--medium-grey) !important;
+    margin: 24px 0 !important; /* Увеличил отступы */
+}
+
+/* Алерты */
+.v-alert {
+    border-radius: 12px !important;
+    margin: 20px 0 !important; /* Увеличил отступы */
+    padding: 20px !important;
+}
+
+/* Чипы */
+.v-chip {
+    font-weight: 500 !important;
+    margin: 8px !important; /* Увеличил отступы */
+    padding: 8px 16px !important;
+}
+
+/* Паддинги для содержимого */
+.padded-content {
+    padding: 32px !important; /* Увеличил padding */
+}
+
+@media (max-width: 600px) {
+    .padded-content {
+        padding: 20px !important;
+    }
+    
+    .content-card {
+        padding: 20px !important;
+    }
+}
+
+/* Эффект наведения для всех кликабельных элементов */
+.clickable {
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.clickable:hover {
+    opacity: 0.9;
+}
+
+/* Контейнеры с отступами */
+.spaced-container {
+    padding: 40px 0; /* Увеличил отступы сверху и снизу */
+}
+
+@media (max-width: 960px) {
+    .spaced-container {
+        padding: 32px 0;
+    }
+}
+
+@media (max-width: 600px) {
+    .spaced-container {
+        padding: 24px 0;
+    }
+}
+
+/* Уведомления */
+.notification-container {
+    position: fixed;
+    top: 80px;
+    right: 20px;
+    z-index: 1000;
+    max-width: 400px;
+}
+
+.notification-alert {
+    margin-bottom: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Исправление для шапки */
+.v-app-bar {
+    position: fixed !important;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+}
+
+/* Улучшенные отступы для текста */
+.text-content {
+    line-height: 1.8 !important;
+    margin-bottom: 24px !important;
+}
+
+/* Улучшенные отступы для списков */
+.v-list-item {
+    padding: 16px 0 !important;
+}
+
+.v-list-item:not(:last-child) {
+    border-bottom: 1px solid var(--medium-grey);
+}
+/* Добавляем в конец style.css */
+
+/* Исправление для заголовка в шапке */
+.header-title {
+    font-size: 1.8rem !important;
+    line-height: 1.2 !important;
+}
+
+/* Исправление для языковых заголовков */
+.language-title {
+    line-height: 1.2 !important;
+    margin-bottom: 12px !important;
+}
+
+/* Яркие кнопки проверки */
+.check-btn {
+    background: linear-gradient(135deg, #FF4081, #FF5252) !important;
+    color: white !important;
+    font-weight: 700 !important;
+    box-shadow: 0 4px 12px rgba(255, 64, 129, 0.3) !important;
+}
+
+.check-btn:hover {
+    background: linear-gradient(135deg, #FF5252, #FF4081) !important;
+    box-shadow: 0 6px 16px rgba(255, 64, 129, 0.4) !important;
+    transform: translateY(-2px) !important;
+}
+
+/* Исправление отступов для блоков прогресса */
+.language-stats-card {
+    margin-top: 16px !important;
+}
+
+/* Убедимся, что заголовки языков не перекрываются */
+.language-header {
+    margin-bottom: 24px !important;
+}
+
+/* Улучшенные отступы для всех заголовков */
+.page-title, .section-title, .headline {
+    line-height: 1.3 !important;
+}
+
+
+/* Общие стили для ярких кнопок */
+.btn-bright {
+    background: linear-gradient(135deg, #FF4081, #FF5252) !important;
+    color: white !important;
+    font-weight: 700 !important;
+    box-shadow: 0 4px 12px rgba(255, 64, 129, 0.3) !important;
+    transition: all 0.3s ease !important;
+}
+
+.btn-bright:hover {
+    background: linear-gradient(135deg, #FF5252, #FF4081) !important;
+    box-shadow: 0 6px 16px rgba(255, 64, 129, 0.4) !important;
+    transform: translateY(-2px) !important;
+}
+
+.btn-bright:disabled {
+    background: #E0E0E0 !important;
+    color: #9E9E9E !important;
+    box-shadow: none !important;
+    transform: none !important;
+}
+
+/* Улучшенные отступы для шапки */
+.v-toolbar__content {
+    padding: 0 24px !important;
+}
+
+@media (max-width: 960px) {
+    .v-toolbar__content {
+        padding: 0 16px !important;
+    }
+}
+
+/* Убедимся, что название сайта полностью видно */
+.site-title {
+    min-width: 120px !important;
+    overflow: visible !important;
+}

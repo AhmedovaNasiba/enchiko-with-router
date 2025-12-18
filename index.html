@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EnChiKo - Изучение языков</title>
+    
+    <!-- Vue.js и Vuetify -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+    <script src="https://unpkg.com/vue-router@3.6.5/dist/vue-router.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/@mdi/font@6.x/css/materialdesignicons.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
+    
+    <!-- Анимации -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    
+    <!-- Наши стили -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="app">
+        <!-- Роутер вью -->
+        <router-view></router-view>
+        
+        <!-- Уведомления (глобальные) -->
+        <div class="notification-container">
+            <transition-group name="slide" tag="div">
+                <v-alert
+                    v-for="notification in $root.notifications"
+                    :key="notification.id"
+                    :type="notification.type"
+                    :icon="notification.icon"
+                    dense
+                    class="notification-alert"
+                    v-show="notification.show"
+                >
+                    {{ notification.message }}
+                </v-alert>
+            </transition-group>
+        </div>
+    </div>
+
+    <!-- Подключаем данные -->
+    <script src="data.js"></script>
+    
+    <!-- Подключаем компоненты -->
+    <script src="components/Header.js"></script>
+    <script src="components/Home.js"></script>
+    <script src="components/LanguageDetail.js"></script>
+    <script src="components/LessonDetail.js"></script>
+    <script src="components/Dictionary.js"></script>
+    <script src="components/Exercises.js"></script>
+    <script src="components/Progress.js"></script>
+    <script src="components/Profile.js"></script>
+    
+    <!-- Подключаем основное приложение -->
+    <script src="app.js"></script>
+    
+    <!-- Подключаем роутер -->
+    <script src="router.js"></script>
+</body>
+</html>
