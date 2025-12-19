@@ -1,9 +1,7 @@
-// Компонент деталей урока (с яркими кнопками проверки)
 Vue.component('lesson-detail', {
     props: {
         lesson: Object,
         languageId: String,
-        user: Object
     },
     
     template: `
@@ -284,218 +282,6 @@ Vue.component('lesson-detail', {
                     </v-card>
                 </v-col>
             </v-row>
-            
-            <style>
-                /* Стили для компонента урока */
-                .back-btn {
-                    padding: 8px 16px;
-                    font-weight: 600;
-                }
-                
-                .lesson-header {
-                    margin-bottom: 40px;
-                }
-                
-                .lesson-main-title {
-                    font-size: 2.2rem !important;
-                    line-height: 1.2 !important;
-                    margin-bottom: 12px;
-                }
-                
-                .lesson-description {
-                    line-height: 1.6;
-                    color: #666;
-                    font-size: 1.1rem !important;
-                }
-                
-                .lesson-content {
-                    border-radius: 16px;
-                    min-height: 600px;
-                }
-                
-                .text-content {
-                    line-height: 1.8;
-                    font-size: 1.1rem;
-                    color: var(--dark-color);
-                }
-                
-                .section-title {
-                    color: var(--primary-color);
-                    font-size: 1.4rem !important;
-                    margin-bottom: 24px;
-                    padding-bottom: 12px;
-                    border-bottom: 2px solid var(--light-grey);
-                }
-                
-                /* Правила */
-                .rule-card {
-                    background-color: #FFF8E1;
-                    border: 2px solid #FFECB3;
-                    border-radius: 12px;
-                    padding: 28px;
-                    margin-bottom: 24px;
-                }
-                
-                .rule-title {
-                    color: var(--accent-color);
-                    font-weight: 700;
-                    margin-bottom: 16px;
-                    display: flex;
-                    align-items: center;
-                    font-size: 1.2rem;
-                }
-                
-                .rule-title i {
-                    margin-right: 12px;
-                }
-                
-                /* Примеры */
-                .example-card {
-                    background-color: var(--light-grey);
-                    border-left: 4px solid var(--primary-color);
-                    padding: 20px;
-                    margin-bottom: 16px;
-                    border-radius: 0 8px 8px 0;
-                }
-                
-                .example-original {
-                    font-weight: 700;
-                    margin-bottom: 8px;
-                    color: var(--dark-color);
-                    font-size: 1.1rem;
-                }
-                
-                .example-translation {
-                    color: #666;
-                    font-style: italic;
-                    font-size: 1rem;
-                }
-                
-                /* Упражнения */
-                .exercise-container {
-                    border-radius: 12px;
-                    border: 2px solid var(--medium-grey);
-                    background-color: var(--light-grey);
-                }
-                
-                .question-text {
-                    color: var(--dark-color);
-                    font-size: 1.2rem !important;
-                    line-height: 1.5;
-                }
-                
-                /* ЯРКАЯ КНОПКА ПРОВЕРКИ */
-                .btn-check {
-                    background: linear-gradient(135deg, #FF4081, #FF5252) !important;
-                    color: white !important;
-                    font-weight: 700 !important;
-                    padding: 14px 32px !important;
-                    border-radius: 8px !important;
-                    box-shadow: 0 4px 12px rgba(255, 64, 129, 0.3) !important;
-                }
-                
-                .btn-check:hover {
-                    background: linear-gradient(135deg, #FF5252, #FF4081) !important;
-                    box-shadow: 0 6px 16px rgba(255, 64, 129, 0.4) !important;
-                    transform: translateY(-2px) !important;
-                }
-                
-                .btn-check:disabled {
-                    background: #E0E0E0 !important;
-                    color: #9E9E9E !important;
-                    box-shadow: none !important;
-                    transform: none !important;
-                }
-                
-                .translation-input .v-input__control {
-                    min-height: 56px;
-                }
-                
-                .result-alert {
-                    border-radius: 12px;
-                    padding: 20px !important;
-                }
-                
-                /* Прогресс урока */
-                .progress-card {
-                    border-radius: 16px;
-                    background: linear-gradient(135deg, #F5F7FA, #E3F2FD);
-                }
-                
-                .complete-btn {
-                    padding: 16px !important;
-                    font-size: 1.1rem !important;
-                    font-weight: 700 !important;
-                }
-                
-                /* Содержание */
-                .section-item {
-                    padding: 12px 0 !important;
-                    cursor: pointer;
-                    transition: background-color 0.2s;
-                    border-radius: 8px;
-                }
-                
-                .section-item:hover {
-                    background-color: rgba(74, 144, 226, 0.1);
-                }
-                
-                .next-lesson-btn {
-                    font-weight: 600;
-                    padding: 12px !important;
-                }
-                
-                /* Адаптивность */
-                @media (max-width: 960px) {
-                    .lesson-main-title {
-                        font-size: 1.8rem !important;
-                    }
-                    
-                    .lesson-description {
-                        font-size: 1rem !important;
-                    }
-                    
-                    .lesson-content {
-                        padding: 24px !important;
-                    }
-                    
-                    .section-title {
-                        font-size: 1.2rem !important;
-                    }
-                    
-                    .btn-check {
-                        padding: 12px 24px !important;
-                        width: 100%;
-                    }
-                }
-                
-                @media (max-width: 600px) {
-                    .lesson-header {
-                        margin-bottom: 32px;
-                    }
-                    
-                    .lesson-main-title {
-                        font-size: 1.6rem !important;
-                    }
-                    
-                    .lesson-content {
-                        padding: 20px !important;
-                    }
-                    
-                    .progress-card {
-                        padding: 20px !important;
-                    }
-                    
-                    .btn-check, .complete-btn {
-                        font-size: 1rem !important;
-                        padding: 12px !important;
-                    }
-                    
-                    .rule-card, .example-card {
-                        padding: 16px !important;
-                    }
-                }
-            </style>
         </v-container>
     `,
     
@@ -515,6 +301,8 @@ Vue.component('lesson-detail', {
     },
     
     computed: {
+        ...Vuex.mapState(['user']),
+        
         lessonProgress() {
             const total = this.lessonSections.length;
             const completed = this.lessonSections.filter(s => s.completed).length;
@@ -526,11 +314,13 @@ Vue.component('lesson-detail', {
         },
         
         nextLesson() {
-            return null; // В реальном приложении получаем следующий урок
+            return null;
         }
     },
     
     methods: {
+        ...Vuex.mapActions(['completeLesson', 'showNotification']),
+        
         canCheckExercise(index) {
             const exercise = this.lesson.content.exercises[index];
             
@@ -559,13 +349,11 @@ Vue.component('lesson-detail', {
             
             this.exerciseResults[index] = isCorrect;
             
-            // Отмечаем раздел упражнений как пройденный
             if (isCorrect) {
                 this.markSectionComplete('exercises');
             }
             
-            // Показываем уведомление
-            this.$root.showNotification({
+            this.showNotification({
                 type: isCorrect ? 'success' : 'error',
                 message: isCorrect ? 'Правильно!' : 'Неправильно, попробуйте еще раз',
                 icon: isCorrect ? 'mdi-check' : 'mdi-close'
@@ -597,23 +385,23 @@ Vue.component('lesson-detail', {
             }
         },
         
-        completeLesson(points) {
+        completeLesson() {
             if (this.lessonProgress >= 100 || this.lesson.completed) {
                 const points = 25;
-                // Эмитим событие родителю
-                this.$emit('complete-lesson', points);
+                this.$store.dispatch('completeLesson', {
+                    languageId: this.languageId,
+                    lessonId: this.lesson.id,
+                    points: points
+                });
                 this.lesson.completed = true;
                 
-                this.$root.showNotification({
+                this.showNotification({
                     type: 'success',
                     message: 'Поздравляем! Вы завершили урок!',
                     icon: 'mdi-trophy'
                 });
-                
-                // Возвращаемся назад
-                this.$router.go(-1);
             } else {
-                this.$root.showNotification({
+                this.showNotification({
                     type: 'warning',
                     message: 'Завершите все разделы урока',
                     icon: 'mdi-alert'
@@ -629,7 +417,6 @@ Vue.component('lesson-detail', {
     },
     
     created() {
-        // При загрузке отмечаем пройденные разделы
         if (this.lesson.content?.introduction) {
             this.markSectionComplete('introduction');
         }
@@ -642,7 +429,6 @@ Vue.component('lesson-detail', {
             this.markSectionComplete('vocabulary');
         }
         
-        // Если урок уже завершен, отмечаем все разделы
         if (this.lesson.completed) {
             this.lessonSections.forEach(section => {
                 section.completed = true;

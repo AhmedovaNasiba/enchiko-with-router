@@ -1,9 +1,6 @@
-// Компонент деталей языка (исправленный заголовок)
 Vue.component('language-detail', {
     props: {
         languageId: String,
-        languages: Array,
-        user: Object
     },
     
     template: `
@@ -458,12 +455,15 @@ Vue.component('language-detail', {
     },
     
     computed: {
+        ...Vuex.mapState(['languages', 'user']),
+        ...Vuex.mapGetters(['getLanguageProgress']),
+        
         language() {
             return this.languages.find(lang => lang.id === this.languageId) || {};
         },
         
         progress() {
-            return Math.round((this.language.completedLessons / this.language.totalLessons) * 100) || 0;
+            return this.getLanguageProgress(this.languageId);
         },
         
         learnedWords() {
@@ -472,6 +472,8 @@ Vue.component('language-detail', {
     },
     
     methods: {
+        ...Vuex.mapActions(['startLesson']),
+        
         selectCategory(categoryId) {
             this.selectedCategory = this.language.categories.find(c => c.id === categoryId);
             this.loadLessons(categoryId);
@@ -503,18 +505,6 @@ Vue.component('language-detail', {
                 'Продвинутый': 'badge-advanced'
             };
             return classes[difficulty] || 'badge-beginner';
-        },
-        
-        startLesson(lesson) {
-            // Вместо эмита события используем роутер
-            this.$router.push({ 
-                name: 'lesson-detail', 
-                params: { 
-                    languageId: this.languageId,
-                    lessonId: lesson.id 
-                },
-                query: { lesson: JSON.stringify(lesson) }
-            });
         }
     },
     

@@ -1,6 +1,6 @@
 const router = new VueRouter({
-    mode: 'history', // Используем history mode для красивых URL
-    base: '/',       // Базовый URL
+    mode: 'hash', 
+    base: '/',       
     routes: [
         {
             path: '/',

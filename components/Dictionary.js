@@ -1,11 +1,5 @@
-// Компонент словаря
 Vue.component('dictionary-page', {
-    // Свойства компонента
-    props: {
-        languages: Array  // Список языков
-    },
-    
-    // Шаблон компонента
+
     template: `
         <v-container class="custom-container py-6">
             <v-row>
@@ -118,23 +112,19 @@ Vue.component('dictionary-page', {
     
     // Вычисляемые свойства
     computed: {
-        // Активный язык (на основе активной вкладки)
+        ...Vuex.mapState(['languages']),
+        
         activeLanguage() {
             return this.languages[this.activeTab];
         }
     },
-    
-    // Методы компонента
+
     methods: {
-        // Загрузка слов для всех языков
         loadWords() {
-            // Генерация тестовых данных
             this.allWords = this.generateWords();
-            // Изначально показываем все слова для активного языка
             this.filterWords();
         },
         
-        // Генерация тестовых слов
         generateWords() {
             const words = {
                 chinese: [
@@ -159,18 +149,15 @@ Vue.component('dictionary-page', {
             return words;
         },
         
-        // Фильтрация слов
         filterWords() {
             if (!this.activeLanguage) {
                 this.filteredWords = [];
                 return;
             }
             
-            // Получаем слова для активного языка
             const languageId = this.activeLanguage.id;
             let words = this.allWords[languageId] || [];
             
-            // Применяем поиск, если есть запрос
             if (this.searchQuery) {
                 const query = this.searchQuery.toLowerCase();
                 words = words.filter(word => 
@@ -183,20 +170,16 @@ Vue.component('dictionary-page', {
             this.filteredWords = words;
         },
         
-        // Переключение статуса слова (изучено/изучается)
         toggleWordStatus(word) {
             word.learned = !word.learned;
             
-            // Показываем уведомление
-            const status = word.learned ? 'изучено' : 'отмечено как изучаемое';
-            this.$emit('show-notification', {
-                color: word.learned ? 'success' : 'info',
-                text: `Слово "${word.word}" ${status}`,
-                timeout: 2000
+            this.$store.dispatch('showNotification', {
+                type: word.learned ? 'success' : 'info',
+                message: `Слово "${word.word}" ${word.learned ? 'изучено' : 'отмечено как изучаемое'}`,
+                icon: 'mdi-check'
             });
         },
         
-        // Получение цвета для части речи
         getPartOfSpeechColor(part) {
             const colors = {
                 'существительное': 'blue',
@@ -212,12 +195,10 @@ Vue.component('dictionary-page', {
     
     // Наблюдатели
     watch: {
-        // При изменении активной вкладки обновляем слова
         activeTab() {
             this.filterWords();
         },
         
-        // При изменении поискового запроса обновляем фильтрацию
         searchQuery() {
             this.filterWords();
         }

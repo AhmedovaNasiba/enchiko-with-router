@@ -1,8 +1,4 @@
-// Компонент профиля (с яркой кнопкой сохранения)
 Vue.component('profile-page', {
-    props: {
-        user: Object
-    },
     
     template: `
         <v-container class="custom-container py-6">
@@ -367,423 +363,7 @@ Vue.component('profile-page', {
                 </v-card>
             </v-dialog>
             
-            <style>
-                /* Стили для компонента профиля */
-                .profile-row {
-                    margin: -16px;
-                }
-                
-                .profile-row .v-col {
-                    padding: 16px !important;
-                }
-                
-                /* Карточка информации профиля */
-                .profile-info-card {
-                    border-radius: 16px;
-                    overflow: hidden;
-                }
-                
-                .profile-header {
-                    background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
-                    color: white;
-                }
-                
-                .avatar-container {
-                    position: relative;
-                    display: inline-block;
-                }
-                
-                .profile-avatar {
-                    border: 4px solid white;
-                    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
-                    transition: all 0.3s ease;
-                }
-                
-                .profile-avatar:hover {
-                    transform: scale(1.05);
-                    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.2);
-                }
-                
-                .avatar-image {
-                    position: relative;
-                    width: 100%;
-                    height: 100%;
-                }
-                
-                .avatar-overlay {
-                    position: absolute;
-                    top: 0;
-                    left: 0;
-                    width: 100%;
-                    height: 100%;
-                    background: rgba(0, 0, 0, 0.5);
-                    border-radius: 50%;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    opacity: 0;
-                    transition: opacity 0.3s ease;
-                    cursor: pointer;
-                }
-                
-                .avatar-image:hover .avatar-overlay {
-                    opacity: 1;
-                }
-                
-                .avatar-initials {
-                    width: 100%;
-                    height: 100%;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    border-radius: 50%;
-                    position: relative;
-                }
-                
-                .initials-text {
-                    color: white;
-                    font-weight: 700;
-                    font-size: 2.5rem;
-                }
-                
-                .avatar-upload-hint {
-                    position: absolute;
-                    bottom: 0;
-                    right: 0;
-                    width: 36px;
-                    height: 36px;
-                    background: var(--secondary-color);
-                    border-radius: 50%;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    border: 2px solid white;
-                    cursor: pointer;
-                    transition: transform 0.3s ease;
-                }
-                
-                .avatar-upload-hint:hover {
-                    transform: scale(1.1);
-                }
-                
-                .avatar-remove-btn {
-                    position: absolute;
-                    top: -8px;
-                    right: -8px;
-                    background-color: white !important;
-                    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-                }
-                
-                .profile-name {
-                    color: white;
-                }
-                
-                .profile-level {
-                    font-weight: 600;
-                }
-                
-                .profile-email {
-                    color: rgba(255, 255, 255, 0.9);
-                }
-                
-                .profile-join-date {
-                    color: rgba(255, 255, 255, 0.7);
-                }
-                
-                .profile-bio {
-                    border-top: 1px solid var(--medium-grey);
-                }
-                
-                /* Карточка статистики */
-                .profile-stats-card {
-                    border-radius: 16px;
-                }
-                
-                .stats-title {
-                    color: var(--primary-color);
-                }
-                
-                .stats-content {
-                    padding-top: 0;
-                }
-                
-                .stats-list {
-                    background-color: transparent;
-                }
-                
-                .stats-item {
-                    padding: 16px 0;
-                }
-                
-                .stats-icon {
-                    min-width: 48px;
-                }
-                
-                .stats-label {
-                    font-weight: 500;
-                    color: var(--dark-color);
-                }
-                
-                .stats-value {
-                    font-weight: 700;
-                    font-size: 1.2rem;
-                    color: var(--primary-color);
-                }
-                
-                .stats-divider {
-                    margin: 0 !important;
-                }
-                
-                /* Карточка редактирования профиля */
-                .profile-edit-card {
-                    border-radius: 16px;
-                }
-                
-                .edit-title {
-                    color: var(--primary-color);
-                }
-                
-                .edit-form {
-                    padding-top: 0;
-                }
-                
-                .form-row {
-                    margin: -12px;
-                }
-                
-                .form-row .v-col {
-                    padding: 12px !important;
-                }
-                
-                .form-field {
-                    margin-bottom: 8px !important;
-                }
-                
-                .form-actions {
-                    margin-top: 32px;
-                    padding-top: 24px;
-                    border-top: 2px solid var(--light-grey);
-                }
-                
-                /* ЯРКАЯ КНОПКА СОХРАНЕНИЯ */
-                .btn-save {
-                    background: linear-gradient(135deg, #FF4081, #FF5252) !important;
-                    color: white !important;
-                    font-weight: 700 !important;
-                    padding: 18px 48px !important;
-                    border-radius: 10px !important;
-                    box-shadow: 0 6px 16px rgba(255, 64, 129, 0.3) !important;
-                    font-size: 1.1rem !important;
-                    letter-spacing: 0.5px !important;
-                    text-transform: uppercase !important;
-                }
-                
-                .btn-save:hover {
-                    background: linear-gradient(135deg, #FF5252, #FF4081) !important;
-                    box-shadow: 0 8px 20px rgba(255, 64, 129, 0.4) !important;
-                    transform: translateY(-2px) !important;
-                }
-                
-                .btn-save:disabled {
-                    background: #E0E0E0 !important;
-                    color: #9E9E9E !important;
-                    box-shadow: none !important;
-                    transform: none !important;
-                    cursor: not-allowed !important;
-                }
-                
-                .btn-save .v-icon {
-                    font-size: 22px !important;
-                }
-                
-                /* Карточка настроек */
-                .settings-card {
-                    border-radius: 16px;
-                }
-                
-                .settings-title {
-                    color: var(--primary-color);
-                }
-                
-                .settings-content {
-                    padding-top: 0;
-                }
-                
-                .settings-list {
-                    background-color: transparent;
-                }
-                
-                .settings-item {
-                    padding: 16px 0;
-                }
-                
-                .settings-icon {
-                    min-width: 48px;
-                }
-                
-                .settings-text {
-                    padding-right: 16px;
-                }
-                
-                .settings-action {
-                    margin: 0;
-                }
-                
-                .settings-switch {
-                    margin: 0;
-                }
-                
-                .settings-divider {
-                    margin: 0 !important;
-                }
-                
-                /* Карточка управления аккаунтом */
-                .account-card {
-                    border-radius: 16px;
-                }
-                
-                .account-title {
-                    color: var(--primary-color);
-                }
-                
-                .account-content {
-                    padding-top: 0;
-                }
-                
-                .account-list {
-                    background-color: transparent;
-                }
-                
-                .account-item {
-                    padding: 16px 0;
-                    cursor: pointer;
-                    transition: background-color 0.2s;
-                }
-                
-                .account-item:hover {
-                    background-color: rgba(0, 0, 0, 0.02);
-                }
-                
-                .reset-item:hover {
-                    background-color: rgba(255, 152, 0, 0.1);
-                }
-                
-                .delete-item:hover {
-                    background-color: rgba(255, 82, 82, 0.1);
-                }
-                
-                .account-icon {
-                    min-width: 48px;
-                }
-                
-                .account-text {
-                    padding-right: 16px;
-                }
-                
-                .account-action {
-                    margin: 0;
-                }
-                
-                .account-divider {
-                    margin: 0 !important;
-                }
-                
-                /* Диалоги */
-                .reset-dialog .v-card,
-                .delete-dialog .v-card {
-                    border-radius: 16px;
-                }
-                
-                .dialog-title {
-                    color: var(--dark-color);
-                    padding-bottom: 16px;
-                }
-                
-                .dialog-text {
-                    color: #666;
-                    line-height: 1.6;
-                }
-                
-                .reset-list {
-                    padding-left: 20px;
-                }
-                
-                .reset-list li {
-                    margin-bottom: 8px;
-                    color: var(--dark-color);
-                }
-                
-                .dialog-actions {
-                    padding: 16px 24px;
-                }
-                
-                .dialog-btn {
-                    font-weight: 600;
-                    padding: 8px 24px;
-                }
-                
-                .cancel-btn {
-                    color: #666;
-                }
-                
-                .confirm-btn {
-                    color: white;
-                }
-                
-                /* Адаптивность */
-                @media (max-width: 960px) {
-                    .profile-info-card,
-                    .profile-stats-card,
-                    .profile-edit-card,
-                    .settings-card,
-                    .account-card {
-                        margin-bottom: 24px;
-                    }
-                    
-                    .profile-avatar {
-                        width: 120px !important;
-                        height: 120px !important;
-                    }
-                    
-                    .initials-text {
-                        font-size: 2rem;
-                    }
-                    
-                    .btn-save {
-                        padding: 16px 32px !important;
-                        font-size: 1rem !important;
-                        width: 100%;
-                    }
-                    
-                    .form-actions {
-                        text-align: center;
-                    }
-                }
-                
-                @media (max-width: 600px) {
-                    .profile-header {
-                        padding: 24px !important;
-                    }
-                    
-                    .profile-avatar {
-                        width: 100px !important;
-                        height: 100px !important;
-                    }
-                    
-                    .initials-text {
-                        font-size: 1.8rem;
-                    }
-                    
-                    .btn-save {
-                        padding: 14px 24px !important;
-                        font-size: 0.95rem !important;
-                    }
-                    
-                    .dialog-btn {
-                        padding: 8px 16px;
-                    }
-                }
-            </style>
+            
         </v-container>
     `,
     
@@ -795,16 +375,16 @@ Vue.component('profile-page', {
             showDeleteDialog: false,
             
             form: {
-                name: this.user.name,
-                email: this.user.email,
-                bio: this.user.bio || '',
-                level: this.user.level
+                name: this.$store.state.user.name, 
+                email: this.$store.state.user.email,
+                bio: this.$store.state.user.bio || '',
+                level: this.$store.state.user.level
             },
             
             settings: {
-                notifications: this.user.settings?.notifications || true,
-                darkMode: this.user.settings?.darkMode || false,
-                dailyReminder: this.user.settings?.dailyReminder || true
+                notifications: this.$store.state.user.settings?.notifications || true,
+                darkMode: this.$store.state.user.settings?.darkMode || false,
+                dailyReminder: this.$store.state.user.settings?.dailyReminder || true
             },
             
             levels: ['Новичок', 'Средний', 'Продвинутый', 'Эксперт'],
@@ -822,6 +402,9 @@ Vue.component('profile-page', {
     },
     
     computed: {
+        ...Vuex.mapState(['user']),
+        ...Vuex.mapGetters(['learnedWords']),
+
         learnedWords() {
             const progress = DataManager.getUserProgress();
             return Object.values(progress.words || {}).filter(word => word.learned).length;
@@ -829,6 +412,8 @@ Vue.component('profile-page', {
     },
     
     methods: {
+        ...Vuex.mapActions(['updateUser', 'showNotification']),
+
         getAvatarGradient() {
             return `linear-gradient(135deg, ${this.getAvatarColor()}, ${this.getSecondaryColor()})`;
         },
@@ -871,7 +456,7 @@ Vue.component('profile-page', {
             const file = event.target.files[0];
             if (file) {
                 if (file.size > 5 * 1024 * 1024) {
-                    this.$root.showNotification({
+                     this.showNotification({
                         type: 'error',
                         message: 'Файл слишком большой. Максимальный размер: 5MB',
                         icon: 'mdi-alert'
@@ -880,7 +465,7 @@ Vue.component('profile-page', {
                 }
                 
                 if (!file.type.startsWith('image/')) {
-                    this.$root.showNotification({
+                    this.showNotification({
                         type: 'error',
                         message: 'Пожалуйста, выберите изображение',
                         icon: 'mdi-alert'
@@ -895,9 +480,9 @@ Vue.component('profile-page', {
                         avatar: e.target.result
                     };
                     
-                    this.$emit('update-user', updatedUser);
+                    this.updateUser(updatedUser);
                     
-                    this.$root.showNotification({
+                    this.showNotification({
                         type: 'success',
                         message: 'Фото профиля обновлено',
                         icon: 'mdi-check'
@@ -915,9 +500,9 @@ Vue.component('profile-page', {
                 avatar: null
             };
             
-            this.$emit('update-user', updatedUser);
+            this.updateUser(updatedUser);
             
-            this.$root.showNotification({
+            this.showNotification({
                 type: 'info',
                 message: 'Фото профиля удалено',
                 icon: 'mdi-information'
@@ -939,10 +524,10 @@ Vue.component('profile-page', {
                         initials: this.getUserInitials()
                     };
                     
-                    this.$emit('update-user', updatedUser);
+                    this.updateUser(updatedUser);
                     this.saving = false;
                     
-                    this.$root.showNotification({
+                    this.showNotification({
                         type: 'success',
                         message: 'Профиль успешно обновлен!',
                         icon: 'mdi-check-circle',
@@ -958,21 +543,14 @@ Vue.component('profile-page', {
                 settings: this.settings
             };
             
-            this.$emit('update-user', updatedUser);
+            this.updateUser(updatedUser);
         },
         
         resetProgress() {
-            DataManager.resetProgress();
+            this.$store.commit('RESET_PROGRESS');
             this.showResetDialog = false;
             
-            this.$emit('update-user', {
-                ...this.user,
-                points: 0,
-                streak: 0,
-                level: 'Новичок'
-            });
-            
-            this.$root.showNotification({
+            this.showNotification({
                 type: 'info',
                 message: 'Прогресс сброшен',
                 icon: 'mdi-restart'
@@ -984,17 +562,17 @@ Vue.component('profile-page', {
         },
         
         deleteAccount() {
-            DataManager.resetProgress();
+            this.$store.commit('RESET_PROGRESS');
             this.showDeleteDialog = false;
             
-            this.$root.showNotification({
+            this.showNotification({
                 type: 'warning',
                 message: 'Аккаунт удален',
                 icon: 'mdi-delete'
             });
             
             setTimeout(() => {
-                this.$root.currentPage = 'home';
+                this.$router.push('/');
             }, 1500);
         }
     }

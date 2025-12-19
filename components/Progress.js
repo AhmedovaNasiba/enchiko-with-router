@@ -1,12 +1,7 @@
-// Компонент прогресса (обновленный)
 Vue.component('progress-page', {
-    props: {
-        languages: Array,
-        user: Object
-    },
     
     template: `
-        <v-container class="custom-container py-6">
+        <v-container class="custom-container py-6 progress-container">
             <!-- Заголовок -->
             <div class="mb-6">
                 <h1 class="display-1 font-weight-bold page-title primary--text">Мой прогресс</h1>
@@ -15,9 +10,10 @@ Vue.component('progress-page', {
                 </p>
             </div>
             
-            <v-row>
+            <!-- Используем CSS Grid вместо Vuetify row/col -->
+            <div class="progress-main-grid">
                 <!-- Левая колонка - основной прогресс -->
-                <v-col cols="12" md="8">
+                <div class="progress-main-content">
                     <!-- Карточка прогресса по языкам -->
                     <v-card class="mb-6 content-card">
                         <h2 class="headline mb-4 section-title">Прогресс по языкам</h2>
@@ -67,12 +63,12 @@ Vue.component('progress-page', {
                     </v-card>
                     
                     <!-- Карточка общей статистики -->
-                    <v-card class="content-card">
+                    <v-card class="content-card language-stats-card">
                         <h2 class="headline mb-4 section-title">Статистика обучения</h2>
                         
                         <!-- Список статистики -->
-                        <v-row class="stats-grid">
-                            <v-col cols="12" sm="6" md="3" v-for="stat in stats" :key="stat.title">
+                        <div class="stats-grid">
+                            <div class="stats-col" v-for="stat in stats" :key="stat.title">
                                 <v-card class="stats-card text-center" :color="stat.color" dark>
                                     <v-card-text class="pa-4">
                                         <v-icon size="48" class="mb-3">{{ stat.icon }}</v-icon>
@@ -80,68 +76,70 @@ Vue.component('progress-page', {
                                         <div class="subtitle-2">{{ stat.title }}</div>
                                     </v-card-text>
                                 </v-card>
-                            </v-col>
-                        </v-row>
+                            </div>
+                        </div>
                         
                         <v-divider class="my-6"></v-divider>
                         
                         <!-- Детальная статистика -->
-                        <v-row>
-                            <v-col cols="12" sm="6">
-                                <v-list class="stats-list">
-                                    <v-list-item class="stats-list-item">
-                                        <v-list-item-icon class="stats-icon">
-                                            <v-icon color="primary">mdi-timer</v-icon>
-                                        </v-list-item-icon>
-                                        <v-list-item-content>
-                                            <v-list-item-title>Время обучения</v-list-item-title>
-                                            <v-list-item-subtitle>{{ studyTime }} часов</v-list-item-subtitle>
-                                        </v-list-item-content>
-                                    </v-list-item>
-                                    
-                                    <v-list-item class="stats-list-item">
-                                        <v-list-item-icon class="stats-icon">
-                                            <v-icon color="green">mdi-target</v-icon>
-                                        </v-list-item-icon>
-                                        <v-list-item-content>
-                                            <v-list-item-title>Точность ответов</v-list-item-title>
-                                            <v-list-item-subtitle>{{ accuracy }}%</v-list-item-subtitle>
-                                        </v-list-item-content>
-                                    </v-list-item>
-                                </v-list>
-                            </v-col>
-                            
-                            <v-col cols="12" sm="6">
-                                <v-list class="stats-list">
-                                    <v-list-item class="stats-list-item">
-                                        <v-list-item-icon class="stats-icon">
-                                            <v-icon color="orange">mdi-trophy</v-icon>
-                                        </v-list-item-icon>
-                                        <v-list-item-content>
-                                            <v-list-item-title>Достижения</v-list-item-title>
-                                            <v-list-item-subtitle>{{ unlockedAchievements }}/{{ totalAchievements }} разблокировано</v-list-item-subtitle>
-                                        </v-list-item-content>
-                                    </v-list-item>
-                                    
-                                    <v-list-item class="stats-list-item">
-                                        <v-list-item-icon class="stats-icon">
-                                            <v-icon color="purple">mdi-trending-up</v-icon>
-                                        </v-list-item-icon>
-                                        <v-list-item-content>
-                                            <v-list-item-title>Рост навыков</v-list-item-title>
-                                            <v-list-item-subtitle>+{{ skillGrowth }}% за месяц</v-list-item-subtitle>
-                                        </v-list-item-content>
-                                    </v-list-item>
-                                </v-list>
-                            </v-col>
-                        </v-row>
+                        <div class="detailed-stats">
+                            <v-row>
+                                <v-col cols="12" sm="6">
+                                    <v-list class="stats-list">
+                                        <v-list-item class="stats-list-item">
+                                            <v-list-item-icon class="stats-icon">
+                                                <v-icon color="primary">mdi-timer</v-icon>
+                                            </v-list-item-icon>
+                                            <v-list-item-content>
+                                                <v-list-item-title>Время обучения</v-list-item-title>
+                                                <v-list-item-subtitle>{{ studyTime }} часов</v-list-item-subtitle>
+                                            </v-list-item-content>
+                                        </v-list-item>
+                                        
+                                        <v-list-item class="stats-list-item">
+                                            <v-list-item-icon class="stats-icon">
+                                                <v-icon color="green">mdi-target</v-icon>
+                                            </v-list-item-icon>
+                                            <v-list-item-content>
+                                                <v-list-item-title>Точность ответов</v-list-item-title>
+                                                <v-list-item-subtitle>{{ accuracy }}%</v-list-item-subtitle>
+                                            </v-list-item-content>
+                                        </v-list-item>
+                                    </v-list>
+                                </v-col>
+                                
+                                <v-col cols="12" sm="6">
+                                    <v-list class="stats-list">
+                                        <v-list-item class="stats-list-item">
+                                            <v-list-item-icon class="stats-icon">
+                                                <v-icon color="orange">mdi-trophy</v-icon>
+                                            </v-list-item-icon>
+                                            <v-list-item-content>
+                                                <v-list-item-title>Достижения</v-list-item-title>
+                                                <v-list-item-subtitle>{{ unlockedAchievements }}/{{ totalAchievements }} разблокировано</v-list-item-subtitle>
+                                            </v-list-item-content>
+                                        </v-list-item>
+                                        
+                                        <v-list-item class="stats-list-item">
+                                            <v-list-item-icon class="stats-icon">
+                                                <v-icon color="purple">mdi-trending-up</v-icon>
+                                            </v-list-item-icon>
+                                            <v-list-item-content>
+                                                <v-list-item-title>Рост навыков</v-list-item-title>
+                                                <v-list-item-subtitle>+{{ skillGrowth }}% за месяц</v-list-item-subtitle>
+                                            </v-list-item-content>
+                                        </v-list-item>
+                                    </v-list>
+                                </v-col>
+                            </v-row>
+                        </div>
                     </v-card>
-                </v-col>
+                </div>
                 
                 <!-- Правая колонка - достижения и награды -->
-                <v-col cols="12" md="4">
+                <div class="progress-sidebar">
                     <!-- Карточка достижений -->
-                    <v-card class="mb-6 content-card achievement-container">
+                    <v-card class="content-card achievement-container">
                         <h2 class="headline mb-4 section-title">Достижения</h2>
                         
                         <!-- Список достижений -->
@@ -222,134 +220,8 @@ Vue.component('progress-page', {
                             </v-chip>
                         </div>
                     </v-card>
-                </v-col>
-            </v-row>
-            
-            <style>
-                /* Стили для компонента прогресса */
-                .achievement-container {
-                    background-color: var(--achievement-bg) !important;
-                }
-                
-                .achievement-card {
-                    background-color: white;
-                    border: 1px solid var(--medium-grey);
-                    border-radius: 12px;
-                    padding: 16px;
-                    margin-bottom: 12px;
-                    transition: all 0.3s ease;
-                }
-                
-                .achievement-card:hover {
-                    transform: translateY(-2px);
-                    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-                }
-                
-                .achievement-card.unlocked {
-                    background: linear-gradient(135deg, #FFF9C4, #FFECB3);
-                    border: 2px solid #FFD54F;
-                }
-                
-                .achievement-icon {
-                    transition: all 0.3s ease;
-                }
-                
-                .achievement-icon.unlocked-icon {
-                    box-shadow: 0 4px 8px rgba(255, 213, 79, 0.3);
-                }
-                
-                .achievement-content {
-                    flex: 1;
-                }
-                
-                .unlocked-title {
-                    color: #FF9800;
-                    font-weight: 700;
-                }
-                
-                .achievement-description {
-                    color: #666;
-                    line-height: 1.4;
-                }
-                
-                .achievement-progress {
-                    margin-top: 8px;
-                }
-                
-                .achievement-reward {
-                    margin-top: 8px;
-                }
-                
-                /* Статистика */
-                .stats-grid {
-                    margin: -8px;
-                }
-                
-                .stats-grid .v-col {
-                    padding: 8px !important;
-                }
-                
-                .stats-card {
-                    border-radius: 12px;
-                    height: 100%;
-                    transition: transform 0.3s ease;
-                }
-                
-                .stats-card:hover {
-                    transform: translateY(-4px);
-                }
-                
-                .stats-list {
-                    background-color: transparent;
-                }
-                
-                .stats-list-item {
-                    padding: 12px 0;
-                }
-                
-                .stats-list-item:not(:last-child) {
-                    border-bottom: 1px solid var(--medium-grey);
-                }
-                
-                .stats-icon {
-                    min-width: 40px;
-                }
-                
-                /* Цели */
-                .goal-card {
-                    background: linear-gradient(135deg, #E3F2FD, #F3E5F5);
-                    border: 1px solid #BBDEFB;
-                }
-                
-                .goal-icon {
-                    opacity: 0.9;
-                }
-                
-                .goal-title {
-                    color: var(--primary-color);
-                    font-weight: 700;
-                }
-                
-                .goal-description {
-                    color: #666;
-                    line-height: 1.5;
-                }
-                
-                .goal-progress {
-                    border-radius: 10px;
-                    overflow: hidden;
-                }
-                
-                .goal-progress-text {
-                    color: white;
-                    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
-                }
-                
-                .goal-reward-chip {
-                    font-weight: 600;
-                    padding: 8px 16px;
-                }
-            </style>
+                </div>
+            </div>
         </v-container>
     `,
     
@@ -425,6 +297,8 @@ Vue.component('progress-page', {
     },
     
     computed: {
+        ...Vuex.mapState(['languages', 'user']),
+        
         // Общее количество завершенных уроков
         totalLessons() {
             return this.languages.reduce((total, lang) => {
@@ -434,7 +308,6 @@ Vue.component('progress-page', {
         
         // Количество изученных слов
         learnedWords() {
-            // В реальном приложении нужно считать из данных
             return this.totalLessons * 5; // Пример: 5 слов на урок
         }
     },
@@ -461,7 +334,7 @@ Vue.component('progress-page', {
             // Обновляем следующую цель
             this.updateNextGoal();
             
-            // Обновляем дополнительную статистику
+            // Обновляем дополнительную статистика
             this.updateAdditionalStats();
         },
         

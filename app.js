@@ -1,12 +1,9 @@
 document.addEventListener('DOMContentLoaded', function() {
-
+    // Создаем корневой экземпляр Vue с Vuex
     const app = new Vue({
         el: '#app',
-        
-        // Подключаем роутер
+        store: store,
         router: router,
-        
-        // Инициализация Vuetify
         vuetify: new Vuetify({
             theme: {
                 themes: {
@@ -22,45 +19,12 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             }
         }),
-        
-        // Данные приложения
-        data: {
-            notifications: []
-        },
-        
-        // Методы
-        methods: {
-            // Показ уведомления
-            showNotification(notification) {
-                const id = Date.now();
-                this.notifications.push({
-                    id,
-                    ...notification,
-                    show: true
-                });
-                
-                // Автоматическое скрытие через 3 секунды
-                setTimeout(() => {
-                    const index = this.notifications.findIndex(n => n.id === id);
-                    if (index !== -1) {
-                        this.notifications[index].show = false;
-                        setTimeout(() => {
-                            this.notifications.splice(index, 1);
-                        }, 300);
-                    }
-                }, 3000);
-            }
-        },
-        
-        // Хуки жизненного цикла
         created() {
-            // Делаем метод showNotification глобально доступным
-            this.$root.showNotification = this.showNotification;
-            
-            // Восстанавливаем состояние из localStorage
-            const savedState = DataManager.loadData('state');
-            if (savedState && savedState.selectedLanguageId) {
-            }
+            this.$store.dispatch('loadState');
+        },
+        beforeDestroy() {
+            this.$store.dispatch('saveState');
         }
     });
+    Vue.config.productionTip = false;
 });

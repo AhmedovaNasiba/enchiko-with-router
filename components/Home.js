@@ -1,12 +1,4 @@
-// Компонент главной страницы
 Vue.component('home-page', {
-    // Свойства компонента
-    props: {
-        languages: Array,  // Список языков
-        user: Object       // Данные пользователя
-    },
-    
-    // Шаблон компонента
     template: `
         <v-container class="custom-container py-6">
             <v-row>
@@ -34,7 +26,7 @@ Vue.component('home-page', {
                         class="language-card pa-4"
                         :color="language.color"
                         dark
-                        @click="$emit('select-language', language.id)"
+                        @click="selectLanguage(language.id)"
                     >
                         <!-- Верхняя часть карточки -->
                         <v-row align="center" class="ma-0">
@@ -122,23 +114,20 @@ Vue.component('home-page', {
     
     // Вычисляемые свойства
     computed: {
-        // Общее количество завершенных уроков
+        ...Vuex.mapState(['languages', 'user']),
+        ...Vuex.mapGetters(['learnedWords']),
+        
         totalLessons() {
             return this.languages.reduce((total, lang) => {
                 return total + lang.completedLessons;
             }, 0);
-        },
-        
-        // Количество изученных слов
-        learnedWords() {
-            // Предполагаем, что в каждом уроке 10 слов
-            return this.totalLessons * 10;
         }
     },
     
     // Методы компонента
     methods: {
-        // Расчет прогресса по языку
+        ...Vuex.mapActions(['selectLanguage']),
+        
         getProgress(language) {
             return Math.round((language.completedLessons / language.lessons) * 100);
         }

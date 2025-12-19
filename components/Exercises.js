@@ -1,9 +1,4 @@
-// Компонент упражнений (обновленный с вводом ответов и проверкой)
 Vue.component('exercises-page', {
-    props: {
-        languages: Array,
-        user: Object
-    },
     
     template: `
         <v-container class="custom-container py-6">
@@ -171,7 +166,6 @@ Vue.component('exercises-page', {
                                         color="primary"
                                         @click="checkAnswer"
                                         :disabled="!canCheckAnswer || answerChecked"
-                                        class="check-btn"
                                         class="check-btn btn-check"
                                         large
                                     >
@@ -294,9 +288,7 @@ Vue.component('exercises-page', {
                                 <v-btn
                                     color="secondary"
                                     @click="restartExercise"
-                                    class="btn-lesson restart-btn"
-                                    large
-                                    class="mr-4"
+                                    class="btn-lesson restart-btn mr-4"
                                 >
                                     <v-icon left>mdi-restart</v-icon>
                                     Повторить упражнение
@@ -317,291 +309,7 @@ Vue.component('exercises-page', {
                 </div>
             </v-card>
             
-            <style>
-                /* Стили для компонента упражнений */
-                .exercise-setup {
-                    padding: 24px 0;
-                }
-                
-                .language-selection {
-                    margin: -12px;
-                }
-                
-                .language-selection .v-col {
-                    padding: 12px !important;
-                }
-                
-                .language-option-card {
-                    border: 2px solid transparent;
-                    border-radius: 12px;
-                    cursor: pointer;
-                    transition: all 0.3s ease;
-                    height: 100%;
-                }
-                
-                .language-option-card:hover {
-                    transform: translateY(-4px);
-                    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-                }
-                
-                .language-option-card.selected {
-                    border-width: 2px;
-                    background-color: rgba(0, 0, 0, 0.02);
-                }
-                
-                .exercise-type-selection {
-                    margin: -12px;
-                }
-                
-                .exercise-type-selection .v-col {
-                    padding: 12px !important;
-                }
-                
-                .exercise-type-card {
-                    border: 2px solid transparent;
-                    border-radius: 12px;
-                    cursor: pointer;
-                    transition: all 0.3s ease;
-                    height: 100%;
-                }
-                
-                .exercise-type-card:hover {
-                    transform: translateY(-4px);
-                    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-                }
-                
-                .exercise-type-card.selected {
-                    border-color: var(--primary-color);
-                    background-color: rgba(74, 144, 226, 0.05);
-                }
-                
-                .start-exercise-btn {
-                    padding: 16px 48px !important;
-                    font-size: 1.1rem !important;
-                }
-                
-                /* Активное упражнение */
-                .active-exercise {
-                    padding: 24px 0;
-                }
-                
-                .exercise-header {
-                    padding-bottom: 20px;
-                    border-bottom: 2px solid var(--medium-grey);
-                }
-                
-                .finish-btn {
-                    font-weight: 600;
-                }
-                
-                .question-card {
-                    border-radius: 16px;
-                    margin-bottom: 24px;
-                }
-                
-                .question-text {
-                    color: var(--dark-color);
-                    line-height: 1.6;
-                    font-size: 1.3rem !important;
-                }
-                
-                .options-group {
-                    margin-top: 8px;
-                }
-                
-                .option-content {
-                    display: flex;
-                    align-items: center;
-                }
-                
-                .option-letter {
-                    font-weight: 700;
-                    color: var(--primary-color);
-                    min-width: 24px;
-                }
-                
-                .option-text {
-                    flex: 1;
-                    font-size: 1.1rem;
-                }
-                
-                .translation-input .v-input__control {
-                    min-height: 60px;
-                }
-                
-                .action-buttons {
-                    padding-top: 24px;
-                    border-top: 1px solid var(--medium-grey);
-                }
-                
-                .check-btn, .next-btn {
-                    font-weight: 600;
-                    padding: 12px 32px !important;
-                }
-                
-                .hint-btn {
-                    font-weight: 500;
-                }
-                
-                /* Результаты */
-                .result-section {
-                    border-top: 1px solid var(--medium-grey);
-                    padding-top: 24px;
-                }
-                
-                .result-alert {
-                    border-radius: 12px;
-                }
-                
-                .explanation-card {
-                    border-radius: 12px;
-                    background-color: #FFF8E1;
-                    border: 1px solid #FFECB3;
-                }
-                
-                /* Финальные результаты */
-                .exercise-results {
-                    padding: 40px 0;
-                }
-                
-                .results-card {
-                    border-radius: 20px;
-                    max-width: 800px;
-                    margin: 0 auto;
-                }
-                
-                .trophy-icon {
-                    opacity: 0.9;
-                }
-                
-                .results-title {
-                    color: var(--primary-color);
-                }
-                
-                .stats-grid {
-                    display: grid;
-                    grid-template-columns: repeat(3, 1fr);
-                    gap: 32px;
-                    margin: 40px 0;
-                }
-                
-                .stat-item {
-                    text-align: center;
-                    padding: 24px;
-                    background-color: var(--light-grey);
-                    border-radius: 12px;
-                }
-                
-                .stat-value {
-                    color: var(--primary-color);
-                    margin-bottom: 8px;
-                }
-                
-                .stat-label {
-                    color: #666;
-                    font-size: 0.9rem;
-                }
-                
-                .points-alert {
-                    border-radius: 12px;
-                    max-width: 400px;
-                    margin: 0 auto;
-                }
-                
-                .restart-btn {
-                    margin-right: 16px;
-                }
-                
-                /* Анимации */
-                .slide-enter-active {
-                    transition: all 0.3s ease;
-                }
-                
-                .slide-leave-active {
-                    transition: all 0.3s cubic-bezier(1.0, 0.5, 0.8, 1.0);
-                }
-                
-                .slide-enter, .slide-leave-to {
-                    transform: translateY(10px);
-                    opacity: 0;
-                }
-                
-                /* Адаптивность */
-                @media (max-width: 960px) {
-                    .stats-grid {
-                        grid-template-columns: 1fr;
-                        gap: 20px;
-                    }
-                    
-                    .action-buttons {
-                        flex-direction: column;
-                        gap: 16px;
-                    }
-                    
-                    .action-buttons > div {
-                        width: 100%;
-                        display: flex;
-                        flex-direction: column;
-                        gap: 12px;
-                    }
-                    
-                    .check-btn, .next-btn, .hint-btn {
-                        width: 100%;
-                        margin: 4px 0 !important;
-                    }
-                    
-                    .restart-btn {
-                        margin-right: 0;
-                        margin-bottom: 16px;
-                    }
-                }
-                
-                @media (max-width: 600px) {
-                    .exercise-header {
-                        flex-direction: column;
-                        align-items: flex-start;
-                        gap: 16px;
-                    }
-                    
-                    .finish-btn {
-                        align-self: flex-end;
-                    }
-                    
-                    .question-card {
-                        padding: 20px !important;
-                    }
-                    
-                    .question-text {
-                        font-size: 1.1rem !important;
-                    }
-                    
-                    .results-card {
-                        padding: 24px !important;
-                    }
-                    
-                    .btn-check {
-                        background: linear-gradient(135deg, #FF4081, #FF5252) !important;
-                        color: white !important;
-                        font-weight: 700 !important;
-                        padding: 14px 32px !important;
-                        border-radius: 8px !important;
-                        box-shadow: 0 4px 12px rgba(255, 64, 129, 0.3) !important;
-                    }
-
-                    .btn-check:hover {
-                        background: linear-gradient(135deg, #FF5252, #FF4081) !important;
-                        box-shadow: 0 6px 16px rgba(255, 64, 129, 0.4) !important;
-                        transform: translateY(-2px) !important;
-                    }
-
-                    .btn-check:disabled {
-                        background: #E0E0E0 !important;
-                        color: #9E9E9E !important;
-                        box-shadow: none !important;
-                        transform: none !important;
-                    }
-                }
-            </style>
+            
         </v-container>
     `,
     
@@ -649,12 +357,12 @@ Vue.component('exercises-page', {
     },
     
     computed: {
-        // Текущее упражнение
+        ...Vuex.mapState(['languages', 'user']),
+        
         currentExercise() {
             return this.currentExercises[this.currentQuestionIndex] || {};
         },
         
-        // Можно ли проверить ответ
         canCheckAnswer() {
             if (this.currentExercise.type === 'multiple-choice') {
                 return this.selectedOption !== null;
@@ -666,39 +374,35 @@ Vue.component('exercises-page', {
     },
     
     methods: {
-        // Получение прогресса языка
+        ...Vuex.mapActions(['updateUserPoints', 'showNotification']),
+        
         getLanguageProgress(languageId) {
             const language = this.languages.find(lang => lang.id === languageId);
             if (!language) return 0;
             return Math.round((language.completedLessons / language.totalLessons) * 100) || 0;
         },
         
-        // Выбор языка
         selectLanguage(languageId) {
             this.selectedLanguageId = languageId;
         },
         
-        // Выбор типа упражнения
         selectExerciseType(typeId) {
             this.selectedExerciseType = typeId;
         },
         
-        // Получение названия выбранного языка
         getSelectedLanguageName() {
             const language = this.languages.find(lang => lang.id === this.selectedLanguageId);
             return language ? language.name : '';
         },
         
-        // Получение названия выбранного типа упражнения
         getSelectedExerciseTypeName() {
             const type = this.exerciseTypes.find(t => t.id === this.selectedExerciseType);
             return type ? type.title : '';
         },
         
-        // Начало упражнения
         startExercise() {
             if (!this.selectedLanguageId || !this.selectedExerciseType) {
-                this.$root.showNotification({
+                this.showNotification({
                     type: 'error',
                     message: 'Пожалуйста, выберите язык и тип упражнения',
                     icon: 'mdi-alert'
@@ -708,13 +412,11 @@ Vue.component('exercises-page', {
             
             this.loading = true;
             
-            // Имитация загрузки упражнений
             setTimeout(() => {
-                // Загружаем упражнения для выбранного языка
                 this.currentExercises = this.getExercisesForLanguage(this.selectedLanguageId);
                 
                 if (this.currentExercises.length === 0) {
-                    this.$root.showNotification({
+                    this.showNotification({
                         type: 'info',
                         message: 'Для этого языка пока нет упражнений',
                         icon: 'mdi-information'
@@ -723,7 +425,6 @@ Vue.component('exercises-page', {
                     return;
                 }
                 
-                // Сбрасываем состояние
                 this.currentQuestionIndex = 0;
                 this.score = 0;
                 this.correctAnswers = 0;
@@ -731,11 +432,10 @@ Vue.component('exercises-page', {
                 this.userTranslation = '';
                 this.answerChecked = false;
                 
-                // Активируем упражнение
                 this.exerciseActive = true;
                 this.loading = false;
                 
-                this.$root.showNotification({
+                this.showNotification({
                     type: 'success',
                     message: 'Упражнение начато! Удачи!',
                     icon: 'mdi-flag-checkered'
@@ -743,42 +443,33 @@ Vue.component('exercises-page', {
             }, 500);
         },
         
-        // Получение упражнений для языка
         getExercisesForLanguage(languageId) {
-            // Берем упражнения из данных
             return appData.exercises[languageId] || [];
         },
         
-        // Проверка ответа
         checkAnswer() {
             if (!this.canCheckAnswer || this.answerChecked) return;
             
             this.answerChecked = true;
             
             if (this.currentExercise.type === 'multiple-choice') {
-                // Находим выбранный вариант
                 const selected = this.currentExercise.options.find(opt => opt.id === this.selectedOption);
                 this.isAnswerCorrect = selected ? selected.correct : false;
                 
-                // Находим правильный ответ
                 const correct = this.currentExercise.options.find(opt => opt.correct);
                 this.correctAnswer = correct ? correct.text : '';
                 
             } else if (this.currentExercise.type === 'translation') {
-                // Проверяем перевод (упрощенно, в реальном приложении нужна более сложная логика)
                 const userAnswer = this.userTranslation.trim().toLowerCase();
                 const correctAnswer = this.currentExercise.correctAnswer.toLowerCase();
                 
-                // Простая проверка (можно улучшить)
                 this.isAnswerCorrect = userAnswer === correctAnswer;
                 this.correctAnswer = this.currentExercise.correctAnswer;
             }
             
-            // Обновляем статистику
             if (this.isAnswerCorrect) {
                 this.correctAnswers++;
                 
-                // Начисляем очки
                 const points = this.currentExercise.type === 'multiple-choice' ? 10 : 15;
                 this.score += points;
                 
@@ -788,14 +479,11 @@ Vue.component('exercises-page', {
             }
         },
         
-        // Следующий вопрос
         nextQuestion() {
             if (!this.answerChecked) return;
             
-            // Переходим к следующему вопросу
             this.currentQuestionIndex++;
             
-            // Сбрасываем состояние для нового вопроса
             this.selectedOption = null;
             this.userTranslation = '';
             this.answerChecked = false;
@@ -803,21 +491,19 @@ Vue.component('exercises-page', {
             this.correctAnswer = '';
             this.resultMessage = '';
             
-            // Прокручиваем вверх
             window.scrollTo({ top: 0, behavior: 'smooth' });
         },
         
-        // Показать подсказку
         showHint() {
             if (this.currentExercise.explanation) {
-                this.$root.showNotification({
+                this.showNotification({
                     type: 'info',
                     message: 'Подсказка: ' + this.currentExercise.explanation,
                     icon: 'mdi-lightbulb-on',
                     timeout: 5000
                 });
             } else {
-                this.$root.showNotification({
+                this.showNotification({
                     type: 'info',
                     message: 'Подсказка: Прочитайте внимательно вопрос и варианты ответов',
                     icon: 'mdi-lightbulb-on'
@@ -825,20 +511,17 @@ Vue.component('exercises-page', {
             }
         },
         
-        // Завершить упражнение
         finishExercise() {
             if (this.exerciseActive && this.score > 0) {
-                // Обновляем очки пользователя
-                this.$emit('update-points', this.score);
+                this.updateUserPoints(this.score);
                 
-                this.$root.showNotification({
+                this.showNotification({
                     type: 'success',
                     message: `Упражнение завершено! Вы заработали ${this.score} очков`,
                     icon: 'mdi-trophy'
                 });
             }
             
-            // Сбрасываем состояние
             this.exerciseActive = false;
             this.selectedLanguageId = null;
             this.selectedExerciseType = null;
@@ -848,7 +531,6 @@ Vue.component('exercises-page', {
             this.correctAnswers = 0;
         },
         
-        // Перезапустить упражнение
         restartExercise() {
             this.startExercise();
         }
